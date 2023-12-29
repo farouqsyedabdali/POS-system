@@ -46,9 +46,6 @@ app.post('/record-transaction', (req, res) => {
       return;
     }
 
-    // Optionally, handle items (products) associated with the transaction here
-    // ...
-
     res.json({ message: 'Transaction recorded successfully', transactionId: result.insertId });
   });
 });

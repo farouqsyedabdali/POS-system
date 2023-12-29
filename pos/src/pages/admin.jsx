@@ -31,7 +31,6 @@ const AdminPage = () => {
             <Table.HeadCell>Transaction ID</Table.HeadCell>
             <Table.HeadCell>Amount</Table.HeadCell>
             <Table.HeadCell>Date</Table.HeadCell>
-            {/* Add other relevant head cells here */}
           </Table.Head>
           <Table.Body className="divide-y">
             {transactions.map((transaction, index) => (
@@ -39,7 +38,6 @@ const AdminPage = () => {
                 <Table.Cell>{transaction.id}</Table.Cell>
                 <Table.Cell>${transaction.amount}</Table.Cell>
                 <Table.Cell>{transaction.date}</Table.Cell>
-                {/* Render other transaction cells here */}
               </Table.Row>
             ))}
           </Table.Body>

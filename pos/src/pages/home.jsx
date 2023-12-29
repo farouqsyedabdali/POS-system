@@ -111,7 +111,6 @@ const Home = () => {
           <div className='space-y-6'>
             <p>Your total is ${calculateTotal()}</p>
             <p>Thank you for your purchase!</p>
-            {/* Here you would put your actual checkout form or confirmation details */}
           </div>
         </Modal.Body>
         <Modal.Footer>
