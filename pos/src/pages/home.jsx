@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Modal, Table } from 'flowbite-react';
 import products from '../data/productsData';
+import axios from 'axios';
 
 const Home = () => {
   const [cart, setCart] = useState([]);
@@ -18,10 +19,19 @@ const Home = () => {
     return cart.reduce((total, product) => total + product.price, 0).toFixed(2);
   };
 
-  const handleCheckout = () => {
-    // Placeholder for checkout logic
-    setIsCheckoutModalOpen(true);
+  const handleCheckout = async () => {
+    const totalAmount = calculateTotal();
+    try {
+      await axios.post('http://localhost:3001/record-transaction', { total: totalAmount, items: cart });
+      alert('Checkout successful!');
+      setCart([]);
+    } catch (error) {
+      console.error('Error recording transaction:', error);
+      alert('Failed to record transaction');
+    }
+    setIsCheckoutModalOpen(false);
   };
+  
 
   return (
     <div className='container mx-auto p-4'>
