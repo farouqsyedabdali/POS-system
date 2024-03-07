@@ -50,6 +50,44 @@ app.post('/record-transaction', (req, res) => {
   });
 });
 
+app.get('/employees', (req, res) => {
+  db.query('SELECT * FROM employees', (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error fetching employees' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+app.post('/employees', (req, res) => {
+  const { id, name, email, role } = req.body;
+  const query = 'INSERT INTO employees (id, name, email, role) VALUES (?, ?, ?, ?)';
+  db.query(query, [id, name, email, role], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error adding employee' });
+    } else {
+      res.status(201).json({ message: 'Employee added successfully', employeeId: id });
+    }
+  });
+});
+
+app.delete('/employees/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM employees WHERE id = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error removing employee' });
+    } else {
+      res.json({ message: 'Employee removed successfully', employeeId: id });
+    }
+  });
+});
+
+
 // Start the server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
